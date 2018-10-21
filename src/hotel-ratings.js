@@ -72,11 +72,15 @@ class HotelRatings extends PolymerElement {
         
         <div>Hotel name: <span>[[item.name]]</span></div>
 
-        <div>Hotel stars: <span>[[item.stars]]</span></div>
+        <template is="dom-repeat" items="[[ _makeStarsReview(item.stars) ]]">
+          <img id="reviewStars" src="../images/hstar.png" alt="reviewStars" /> 
+        </template>
+
+        [[item.stars]]
 
         <div>Hotel district: <span>[[item.district]]</span></div>
 
-        <div>Hotel distanceToCityCentre: <span>[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
+        <div>Hotel distance To CityCentre: <span>[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
 
         <div>Hotel Review Score: <span>[[item.review.score]]</span></div>
 
@@ -145,12 +149,19 @@ class HotelRatings extends PolymerElement {
       urlHotel: {
         type: Array,
       },
+      // dataArray: {
+      //   type: Array,
+      // }
+      // urlHotel_Stars: {
+      //   type: String,
+      // }
       // prop1: {
       //   type: Array,
       //   value: 'hotel-ratings',
       // },
     };
   }
+
 
   _formatScoreImage_Excellent(score) {
     // console.log(score, "is score working - excellent hotel");
@@ -185,6 +196,11 @@ class HotelRatings extends PolymerElement {
     if (score >= 0 && score <= 67 ) {
       return true;
     } 
+  }
+
+  _makeStarsReview(stars) {
+    // console.log("make sweets working");
+    return new Array(stars);
   }
 
   handleResponse(event, res) {
