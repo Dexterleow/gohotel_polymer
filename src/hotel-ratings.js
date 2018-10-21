@@ -11,9 +11,14 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-button/paper-button.js';
+import {} from '@polymer/polymer/lib/elements/dom-repeat.js';
+import {} from '@polymer/polymer/lib/elements/dom-if.js';
 import './shared-styles.js';
 
 class HotelRatings extends PolymerElement {
+
+
+
   static get template() {
     return html`
       <iron-ajax
@@ -55,48 +60,86 @@ class HotelRatings extends PolymerElement {
         <div id="hotelResponseAmount"></div>
 
       </div>
+
+
+      <div> Hotel Ratings list: </div>
+
+      <template is="dom-repeat" items="{{urlHotel}}">
+
+        <div><br/># [[index]]</div>
+        
+        <div>Hotel name: <span>[[item.name]]</span></div>
+
+        <div>Hotel stars: <span>[[item.stars]]</span></div>
+
+        <div>Hotel district: <span>[[item.district]]</span></div>
+
+        <div>Hotel distanceToCityCentre: <span>[[item.distanceToCityCentre]]</span></div>
+
+        <div>Hotel Review Score: <span>[[item.review.score]]</span></div>
+
+        // <template is="dom-if" if="[[item.review.score < 50 ]]">
+        //   this score is below 50
+        // </template>
+
+        <div>Hotel Review Count: <span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
+
+        <div>Hotel Costs: <span> S$ </span> <span> [[item.amount]] </span></div>
+
+        <img src="[[item.image]]">
+
+
+
+      </template>
+
     `;
   }
   static get properties() {
     return {
-      prop1: {
-        type: String,
-        value: 'hotel-ratings',
+      // prop1: {
+      //   type: Array,
+      //   value: 'hotel-ratings',
+      // },
+      urlHotel: {
+        type: Array,
       },
-      imgUrl: {
-        type: String,
-        reflectToAttribute: true
-      }
+      // itsHidden: {
+      //   value: false,
+      //   Type: Boolean
+      // }
     };
   }
   handleResponse(event, res) {
 
-    var response = res.response;
+    this.urlHotel = res.response;
 
-    this.hotelResponseName = response[0].name;
-    this.hotelResponseStars = response[0].stars;
-    this.hotelResponseDistrict = response[0].district;
-    this.hotelResponseDistanceToCityCentre = response[0].distanceToCityCentre;
-    this.hotelResponseReviewScore = response[0].review.score;
-    this.hotelResponseReviewCount = response[0].review.reviewsCount;
-    this.hotelResponseAmount = response[0].amount;
+    // var response = res.response;
 
-    this.$.hotelResponseName.innerHTML = `${this.hotelResponseName}`;
-    this.$.hotelResponseStars.innerHTML = `${this.hotelResponseStars}`;
-    this.$.hotelResponseDistrict.innerHTML = `${this.hotelResponseDistrict}`;
-    this.$.hotelResponseDistanceToCityCentre.innerHTML = `${this.hotelResponseDistanceToCityCentre}`;
-    this.$.hotelResponseReviewScore.innerHTML = `${this.hotelResponseReviewScore}`;
-    this.$.hotelResponseReviewCount.innerHTML = `${this.hotelResponseReviewCount}`;
-    this.$.hotelResponseAmount.innerHTML = `${this.hotelResponseAmount}`;
+    // this.hotelResponseName = response[0].name;
+    // this.hotelResponseStars = response[0].stars;
+    // this.hotelResponseDistrict = response[0].district;
+    // this.hotelResponseDistanceToCityCentre = response[0].distanceToCityCentre;
+    // this.hotelResponseReviewScore = response[0].review.score;
+    // this.hotelResponseReviewCount = response[0].review.reviewsCount;
+    // this.hotelResponseAmount = response[0].amount;
 
+    // this.$.hotelResponseName.innerHTML = `${this.hotelResponseName}`;
+    // this.$.hotelResponseStars.innerHTML = `${this.hotelResponseStars}`;
+    // this.$.hotelResponseDistrict.innerHTML = `${this.hotelResponseDistrict}`;
+    // this.$.hotelResponseDistanceToCityCentre.innerHTML = `${this.hotelResponseDistanceToCityCentre}`;
+    // this.$.hotelResponseReviewScore.innerHTML = `${this.hotelResponseReviewScore}`;
+    // this.$.hotelResponseReviewCount.innerHTML = `${this.hotelResponseReviewCount}`;
+    // this.$.hotelResponseAmount.innerHTML = `${this.hotelResponseAmount}`;
 
-    console.log(response, "res");
+    console.log(this.urlHotel, "res");
+    console.log(this.urlHotel.length, "res length");
   }
   nextHotelData() {
     // new call to iron-ajax for hotel data
-    console.log("ajax call")
     this.$.wego_API.generateRequest();
+    console.log("ajax call");
   }
+
 }
 
 window.customElements.define('hotel-ratings', HotelRatings);
