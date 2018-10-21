@@ -57,9 +57,25 @@ class HotelRatings extends PolymerElement {
 
         <div>Hotel Review Score: <span>[[item.review.score]]</span></div>
 
-        // <template is="dom-if" if="[[item.review.score < 50 ]]">
-        //   this score is below 50
-        // </template>
+        <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
+           this score is between 86 to 100. excellent hotel. HOrrayyyy it is working
+        </template>
+
+        <template is="dom-if" if="[[_formatScoreImage_VeryGood(item.review.score)]]">
+          this score is between 80 to 85. very good hotel. HOrrayyyy it is working
+        </template>
+
+        <template is="dom-if" if="[[_formatScoreImage_Good(item.review.score)]]">
+          this score is between 75 to 79. good hotel. HOrrayyyy it is working
+        </template>
+
+        <template is="dom-if" if="[[_formatScoreImage_Fair(item.review.score)]]">
+          this score is between 68 to 74. fair hotel. HOrrayyyy it is working
+        </template>
+
+        <template is="dom-if" if="[[_formatScoreImage_Poor(item.review.score)]]">
+          this score is between 0 to 67. fair hotel. HOrrayyyy it is working
+        </template>
 
         <div>Hotel Review Count: <span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
 
@@ -88,6 +104,47 @@ class HotelRatings extends PolymerElement {
       // }
     };
   }
+
+  _formatScoreImage_Excellent(score) {
+
+    console.log(score, "is score working - excellent hotel");
+    if (score >= 86 && score <= 100 ) {
+      return true;
+    } 
+  }
+
+  _formatScoreImage_VeryGood(score) {
+
+    console.log(score, "is score working - very good hotel");
+    if (score >= 80 && score <= 85 ) {
+      return true;
+    } 
+  }
+
+  _formatScoreImage_Good(score) {
+
+    console.log(score, "is score working - very good hotel");
+    if (score >= 75 && score <= 79 ) {
+      return true;
+    } 
+  }
+
+  _formatScoreImage_Fair(score) {
+
+    console.log(score, "is score working - fair hotel");
+    if (score >= 68 && score <= 74 ) {
+      return true;
+    } 
+  }
+  
+  _formatScoreImage_Poor(score) {
+
+    console.log(score, "is score working - poor hotel");
+    if (score >= 0 && score <= 67 ) {
+      return true;
+    } 
+  }
+
   handleResponse(event, res) {
 
     this.urlHotel = res.response;
@@ -95,6 +152,7 @@ class HotelRatings extends PolymerElement {
     console.log(this.urlHotel, "res");
     console.log(this.urlHotel.length, "res length");
   }
+  
   nextHotelData() {
     // new call to iron-ajax for hotel data
     this.$.wego_API.generateRequest();
