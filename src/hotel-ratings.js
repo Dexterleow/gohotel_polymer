@@ -149,19 +149,8 @@ class HotelRatings extends PolymerElement {
       urlHotel: {
         type: Array,
       },
-      // dataArray: {
-      //   type: Array,
-      // }
-      // urlHotel_Stars: {
-      //   type: String,
-      // }
-      // prop1: {
-      //   type: Array,
-      //   value: 'hotel-ratings',
-      // },
     };
   }
-
 
   _formatScoreImage_Excellent(score) {
     // console.log(score, "is score working - excellent hotel");
