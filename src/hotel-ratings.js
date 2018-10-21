@@ -18,7 +18,6 @@ import './shared-styles.js';
 class HotelRatings extends PolymerElement {
 
 
-
   static get template() {
     return html`
       <iron-ajax
@@ -32,9 +31,6 @@ class HotelRatings extends PolymerElement {
         debounce-duration="300">
       </iron-ajax>
 
-      <button type="button" on-click="nextHotelData">Load Hotel Data</button>
-      <br> <br>
-
       <style include="shared-styles">
 
         :host {
@@ -44,23 +40,6 @@ class HotelRatings extends PolymerElement {
         }
         
       </style>
-
-      <div class="card">
-
-        <div class="circle">1</div>
-
-        <h1>Hotel Ratings</h1>
-
-        <div id="hotelResponseName"></div>
-        <div id="hotelResponseStars"></div>
-        <div id="hotelResponseDistrict"></div>
-        <div id="hotelResponseDistanceToCityCentre"></div>
-        <div id="hotelResponseReviewScore"></div>
-        <div id="hotelResponseReviewCount"></div>
-        <div id="hotelResponseAmount"></div>
-
-      </div>
-
 
       <div> Hotel Ratings list: </div>
 
@@ -96,13 +75,13 @@ class HotelRatings extends PolymerElement {
   }
   static get properties() {
     return {
+      urlHotel: {
+        type: Array,
+      },
       // prop1: {
       //   type: Array,
       //   value: 'hotel-ratings',
       // },
-      urlHotel: {
-        type: Array,
-      },
       // itsHidden: {
       //   value: false,
       //   Type: Boolean
@@ -112,24 +91,6 @@ class HotelRatings extends PolymerElement {
   handleResponse(event, res) {
 
     this.urlHotel = res.response;
-
-    // var response = res.response;
-
-    // this.hotelResponseName = response[0].name;
-    // this.hotelResponseStars = response[0].stars;
-    // this.hotelResponseDistrict = response[0].district;
-    // this.hotelResponseDistanceToCityCentre = response[0].distanceToCityCentre;
-    // this.hotelResponseReviewScore = response[0].review.score;
-    // this.hotelResponseReviewCount = response[0].review.reviewsCount;
-    // this.hotelResponseAmount = response[0].amount;
-
-    // this.$.hotelResponseName.innerHTML = `${this.hotelResponseName}`;
-    // this.$.hotelResponseStars.innerHTML = `${this.hotelResponseStars}`;
-    // this.$.hotelResponseDistrict.innerHTML = `${this.hotelResponseDistrict}`;
-    // this.$.hotelResponseDistanceToCityCentre.innerHTML = `${this.hotelResponseDistanceToCityCentre}`;
-    // this.$.hotelResponseReviewScore.innerHTML = `${this.hotelResponseReviewScore}`;
-    // this.$.hotelResponseReviewCount.innerHTML = `${this.hotelResponseReviewCount}`;
-    // this.$.hotelResponseAmount.innerHTML = `${this.hotelResponseAmount}`;
 
     console.log(this.urlHotel, "res");
     console.log(this.urlHotel.length, "res length");
