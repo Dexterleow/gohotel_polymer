@@ -41,13 +41,13 @@ class HotelRatings extends PolymerElement {
 
         #reviewScore_Container{
           // height:283px;
-          height: 94px;
           width:81px;
+          height: 94px;
           overflow:hidden;
           position: relative;
         }
       
-        #reviewScore_Container #reviewScore_Good_Img {
+        #reviewScore_Container #reviewScore_Good_VeryGood_Excellent_Img {
           position: absolute;
           top: 2px;
         }
@@ -81,7 +81,13 @@ class HotelRatings extends PolymerElement {
         <div>Hotel Review Score: <span>[[item.review.score]]</span></div>
 
         <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
+
            Excellent
+
+           <div id="reviewScore_Container">
+             <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+           </div>
+
         </template>
 
         <template is="dom-if" if="[[_formatScoreImage_VeryGood(item.review.score)]]">
@@ -89,13 +95,19 @@ class HotelRatings extends PolymerElement {
           Very Good
 
           <div id="reviewScore_Container">
-            <img id="reviewScore_Good_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+            <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
           </div>
 
         </template>
 
         <template is="dom-if" if="[[_formatScoreImage_Good(item.review.score)]]">
+
           Good
+
+          <div id="reviewScore_Container">
+            <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+          </div>
+
         </template>
 
         <template is="dom-if" if="[[_formatScoreImage_Fair(item.review.score)]]">
@@ -123,8 +135,6 @@ class HotelRatings extends PolymerElement {
         <div>Hotel Costs: <span> S$ </span> <span> [[item.amount]] </span></div>
 
         <img src="[[item.image]]">
-
-
 
       </template>
 
