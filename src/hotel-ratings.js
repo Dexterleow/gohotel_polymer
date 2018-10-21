@@ -38,6 +38,29 @@ class HotelRatings extends PolymerElement {
 
           padding: 10px;
         }
+
+        #reviewScore_Container{
+          // height:283px;
+          height: 94px;
+          width:81px;
+          overflow:hidden;
+          position: relative;
+        }
+      
+        #reviewScore_Container #reviewScore_Good_Img {
+          position: absolute;
+          top: 2px;
+        }
+
+        #reviewScore_Container #reviewScore_Fair_Img {
+          position: absolute;
+          top: -93px;
+        }
+
+        #reviewScore_Container #reviewScore_Poor_Img {
+          position: absolute;
+          top: -188px;
+        }
         
       </style>
 
@@ -53,28 +76,46 @@ class HotelRatings extends PolymerElement {
 
         <div>Hotel district: <span>[[item.district]]</span></div>
 
-        <div>Hotel distanceToCityCentre: <span>[[item.distanceToCityCentre]]</span></div>
+        <div>Hotel distanceToCityCentre: <span>[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
 
         <div>Hotel Review Score: <span>[[item.review.score]]</span></div>
 
         <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
-           this score is between 86 to 100. excellent hotel. HOrrayyyy it is working
+           Excellent
         </template>
 
         <template is="dom-if" if="[[_formatScoreImage_VeryGood(item.review.score)]]">
-          this score is between 80 to 85. very good hotel. HOrrayyyy it is working
+
+          Very Good
+
+          <div id="reviewScore_Container">
+            <img id="reviewScore_Good_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+          </div>
+
         </template>
 
         <template is="dom-if" if="[[_formatScoreImage_Good(item.review.score)]]">
-          this score is between 75 to 79. good hotel. HOrrayyyy it is working
+          Good
         </template>
 
         <template is="dom-if" if="[[_formatScoreImage_Fair(item.review.score)]]">
-          this score is between 68 to 74. fair hotel. HOrrayyyy it is working
+
+          Fair
+
+          <div id="reviewScore_Container">
+            <img id="reviewScore_Fair_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+          </div>
+
         </template>
 
         <template is="dom-if" if="[[_formatScoreImage_Poor(item.review.score)]]">
-          this score is between 0 to 67. fair hotel. HOrrayyyy it is working
+
+          Poor
+
+          <div id="reviewScore_Container">
+            <img id="reviewScore_Poor_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+          </div>
+
         </template>
 
         <div>Hotel Review Count: <span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
@@ -98,48 +139,39 @@ class HotelRatings extends PolymerElement {
       //   type: Array,
       //   value: 'hotel-ratings',
       // },
-      // itsHidden: {
-      //   value: false,
-      //   Type: Boolean
-      // }
     };
   }
 
   _formatScoreImage_Excellent(score) {
-
-    console.log(score, "is score working - excellent hotel");
+    // console.log(score, "is score working - excellent hotel");
     if (score >= 86 && score <= 100 ) {
       return true;
     } 
   }
 
   _formatScoreImage_VeryGood(score) {
-
-    console.log(score, "is score working - very good hotel");
+    // console.log(score, "is score working - very good hotel");
     if (score >= 80 && score <= 85 ) {
       return true;
     } 
   }
 
   _formatScoreImage_Good(score) {
-
-    console.log(score, "is score working - very good hotel");
+    // console.log(score, "is score working - very good hotel");
     if (score >= 75 && score <= 79 ) {
       return true;
     } 
   }
 
   _formatScoreImage_Fair(score) {
-
-    console.log(score, "is score working - fair hotel");
+    // console.log(score, "is score working - fair hotel");
     if (score >= 68 && score <= 74 ) {
       return true;
     } 
   }
   
   _formatScoreImage_Poor(score) {
-
-    console.log(score, "is score working - poor hotel");
+    // console.log(score, "is score working - poor hotel");
     if (score >= 0 && score <= 67 ) {
       return true;
     } 
@@ -152,7 +184,7 @@ class HotelRatings extends PolymerElement {
     console.log(this.urlHotel, "res");
     console.log(this.urlHotel.length, "res length");
   }
-  
+
   nextHotelData() {
     // new call to iron-ajax for hotel data
     this.$.wego_API.generateRequest();
