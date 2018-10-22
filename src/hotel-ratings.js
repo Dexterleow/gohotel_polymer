@@ -45,11 +45,16 @@ class HotelRatings extends PolymerElement {
         #reviewScore_Container{
           // height:283px;
           width:81px;
-          height: 94px;
+          height:50px;
           overflow:hidden;
           position: relative;
         }
-      
+        
+        .hotel_ratingReviewScoreImage {
+          width: 50%;
+          z-index: -10;
+        }
+
         #reviewScore_Container #reviewScore_Good_VeryGood_Excellent_Img {
           position: absolute;
           top: 2px;
@@ -57,104 +62,127 @@ class HotelRatings extends PolymerElement {
 
         #reviewScore_Container #reviewScore_Fair_Img {
           position: absolute;
-          top: -93px;
+          top: -46px;
         }
 
         #reviewScore_Container #reviewScore_Poor_Img {
           position: absolute;
-          top: -188px;
+          top: -95px;
         }
 
         .hotel_ratingImages {
           max-width:100%;
           height: auto;
         }
-        
-      </style>
 
-      <div> Hotel Ratings list: </div>
+        #hotel_ratingReviewScore {
+          color: white;
+        }
+        
+        #hotel_ratingAmount {
+          color:green;
+        }
+
+        .inline-block {
+          display: inline-block;
+        }
+
+      </style>
 
       <template is="dom-repeat" items="{{urlHotel}}">
 
       <div class="row">
 
-        <div id="hotel_ratingContainer_left" class="col-4">
-
+        <div id="hotel_ratingContainer_left" class="col-3">
           <img class="hotel_ratingImages" src="[[item.image]]">
-
         </div>
       
-        <div id="hotel_ratingContainer_right" class="col-8">
+        <div id="hotel_ratingContainer_right" class="col-9">
 
-          <div><br/># [[index]]</div>
+          <div>[[item.name]]</div>
 
-          <div>Hotel name: <span>[[item.name]]</span></div>
+          <div>
+            <span>
+            <template is="dom-repeat" items="[[ _makeStarsReview(item.stars) ]]">
+              <img id="reviewStars" src="../images/hstar.png" alt="reviewStars" /> 
+            </template>
+            </span>
+            <span>[[item.district]]</span>
+          </div>
 
-          <template is="dom-repeat" items="[[ _makeStarsReview(item.stars) ]]">
-            <img id="reviewStars" src="../images/hstar.png" alt="reviewStars" /> 
-          </template>
-
-          [[item.stars]]
-
-          <div>Hotel district: <span>[[item.district]]</span></div>
-
-          <div>Hotel distance To CityCentre: <span>[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
-
-          <div>Hotel Review Score: <span>[[item.review.score]]</span></div>
+          <div>[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
 
           <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
 
-           Excellent
+            <div class="inline-block" id="reviewScore_Container">
+              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            </div>
 
-           <div id="reviewScore_Container">
-             <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-           </div>
+            <div class="inline-block">
+              <div>Excellent</div>
+              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
+            </div>
 
           </template>
 
           <template is="dom-if" if="[[_formatScoreImage_VeryGood(item.review.score)]]">
 
-            Very Good
+            <div class="inline-block" id="reviewScore_Container">
+              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            </div>
 
-          <div id="reviewScore_Container">
-            <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-          </div>
+            <div class="inline-block">
+              <div>Very Good</div>
+              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
+            </div>
 
           </template>
 
           <template is="dom-if" if="[[_formatScoreImage_Good(item.review.score)]]">
+            
+            <div id="reviewScore_Container">
+              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            </div>
 
-            Good
-
-          <div id="reviewScore_Container">
-            <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-          </div>
+            <div class="inline-block">
+              <div>Good</div>
+              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
+            </div>
 
           </template>
 
           <template is="dom-if" if="[[_formatScoreImage_Fair(item.review.score)]]">
 
-            Fair
-
             <div id="reviewScore_Container">
-              <img id="reviewScore_Fair_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Fair_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            </div>
+
+            <div class="inline-block">
+              <div>Fair</div>
+              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
             </div>
 
           </template>
 
           <template is="dom-if" if="[[_formatScoreImage_Poor(item.review.score)]]">
 
-            Poor
-
             <div id="reviewScore_Container">
-              <img id="reviewScore_Poor_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Poor_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            </div>
+
+            <div class="inline-block">
+              <div>Poor</div>
+              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
             </div>
 
           </template>
 
-          <div>Hotel Review Count: <span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
-
-          <div>Hotel Costs: <span> S$ </span> <span> [[item.amount]] </span></div>
+          <div class="inline-block" id="hotel_ratingAmount"><span> S$ </span> <span> [[item.amount]] </span></div>
 
         <div>
 
