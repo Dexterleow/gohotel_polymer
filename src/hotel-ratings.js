@@ -44,14 +44,18 @@ class HotelRatings extends PolymerElement {
 
         #reviewScore_Container{
           // height:283px;
-          width:81px;
-          height:50px;
+          width: 38px;
+          height: 40px;
           overflow:hidden;
           position: relative;
         }
         
+        #hotel_ratingContainer_right {
+          padding-top: 5px;
+        }
+
         .hotel_ratingReviewScoreImage {
-          width: 50%;
+          width: 35px;
           z-index: -10;
         }
 
@@ -75,25 +79,45 @@ class HotelRatings extends PolymerElement {
           height: auto;
         }
 
+        #reviewStars {
+          width: 15px;
+        }
+
         #hotel_ratingReviewScore {
           color: white;
+          margin-left: 6px;
+          margin-top: 9px;
         }
         
         #hotel_ratingAmount {
           color:green;
+          float: right;
+          margin-right: 5px;
         }
 
         .inline-block {
           display: inline-block;
         }
 
+        .remove-padding {
+          padding: 0;
+        }
+
+        .hotel_ratingRowBorder {
+           0.5px solid lightgrey;
+        }
+
+        .hotel_rating_mobile_fontsize {
+          font-size: 10px;
+        }
+
       </style>
 
       <template is="dom-repeat" items="{{urlHotel}}">
 
-      <div class="row">
+      <div class="row hotel_ratingRowBorder">
 
-        <div id="hotel_ratingContainer_left" class="col-3">
+        <div id="hotel_ratingContainer_left" class="col-3 remove-padding">
           <img class="hotel_ratingImages" src="[[item.image]]">
         </div>
       
@@ -102,15 +126,15 @@ class HotelRatings extends PolymerElement {
           <div>[[item.name]]</div>
 
           <div>
-            <span>
+            <div class="inline-block">
             <template is="dom-repeat" items="[[ _makeStarsReview(item.stars) ]]">
               <img id="reviewStars" src="../images/hstar.png" alt="reviewStars" /> 
             </template>
-            </span>
-            <span>[[item.district]]</span>
+            </div>
+            <div class="inline-block hotel_rating_mobile_fontsize">[[item.district]]</div>
           </div>
 
-          <div>[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
+          <div class="hotel_rating_mobile_fontsize">[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
 
           <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
 
@@ -119,7 +143,7 @@ class HotelRatings extends PolymerElement {
               <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
             </div>
 
-            <div class="inline-block">
+            <div class="inline-block hotel_rating_mobile_fontsize">
               <div>Excellent</div>
               <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
             </div>
@@ -133,7 +157,7 @@ class HotelRatings extends PolymerElement {
               <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
             </div>
 
-            <div class="inline-block">
+            <div class="inline-block hotel_rating_mobile_fontsize">
               <div>Very Good</div>
               <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
             </div>
@@ -147,7 +171,7 @@ class HotelRatings extends PolymerElement {
               <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
             </div>
 
-            <div class="inline-block">
+            <div class="inline-block hotel_rating_mobile_fontsize">
               <div>Good</div>
               <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
             </div>
@@ -161,7 +185,7 @@ class HotelRatings extends PolymerElement {
               <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
             </div>
 
-            <div class="inline-block">
+            <div class="inline-block hotel_rating_mobile_fontsize">
               <div>Fair</div>
               <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
             </div>
@@ -175,7 +199,7 @@ class HotelRatings extends PolymerElement {
               <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
             </div>
 
-            <div class="inline-block">
+            <div class="inline-block hotel_rating_mobile_fontsize">
               <div>Poor</div>
               <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
             </div>
