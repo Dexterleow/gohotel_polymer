@@ -44,8 +44,8 @@ class HotelRatings extends PolymerElement {
 
         #reviewScore_Container{
           // height:283px;
-          width: 38px;
-          height: 40px;
+          width: 27px;
+          height: 30px;
           overflow:hidden;
           position: relative;
         }
@@ -55,7 +55,7 @@ class HotelRatings extends PolymerElement {
         }
 
         .hotel_ratingReviewScoreImage {
-          width: 35px;
+          width: 25px;
           z-index: -10;
         }
 
@@ -66,12 +66,12 @@ class HotelRatings extends PolymerElement {
 
         #reviewScore_Container #reviewScore_Fair_Img {
           position: absolute;
-          top: -46px;
+          top: -28px;
         }
 
         #reviewScore_Container #reviewScore_Poor_Img {
           position: absolute;
-          top: -95px;
+          top: -58px;
         }
 
         .hotel_ratingImages {
@@ -85,8 +85,9 @@ class HotelRatings extends PolymerElement {
 
         #hotel_ratingReviewScore {
           color: white;
-          margin-left: 6px;
-          margin-top: 9px;
+          margin-left: 4px;
+          margin-top: 5px;
+          font-size: 13px;
         }
         
         #hotel_ratingAmount {
@@ -111,6 +112,9 @@ class HotelRatings extends PolymerElement {
           font-size: 10px;
         }
 
+        .hotel_rating_rows_height_adjustment {
+          margin-top: -8px;
+        }
       </style>
 
       <template is="dom-repeat" items="{{urlHotel}}">
@@ -125,7 +129,7 @@ class HotelRatings extends PolymerElement {
 
           <div>[[item.name]]</div>
 
-          <div>
+          <div class="hotel_rating_rows_height_adjustment">
             <div class="inline-block">
             <template is="dom-repeat" items="[[ _makeStarsReview(item.stars) ]]">
               <img id="reviewStars" src="../images/hstar.png" alt="reviewStars" /> 
