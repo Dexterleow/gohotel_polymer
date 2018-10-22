@@ -11,6 +11,8 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-button/paper-button.js';
+// import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
+import '@granite-elements/granite-bootstrap/granite-bootstrap.js';
 import {} from '@polymer/polymer/lib/elements/dom-repeat.js';
 import {} from '@polymer/polymer/lib/elements/dom-if.js';
 import './shared-styles.js';
@@ -31,6 +33,7 @@ class HotelRatings extends PolymerElement {
         debounce-duration="300">
       </iron-ajax>
 
+      <style include="granite-bootstrap"></style>
       <style include="shared-styles">
 
         :host {
@@ -61,6 +64,11 @@ class HotelRatings extends PolymerElement {
           position: absolute;
           top: -188px;
         }
+
+        .hotel_ratingImages {
+          max-width:100%;
+          height: auto;
+        }
         
       </style>
 
@@ -68,23 +76,33 @@ class HotelRatings extends PolymerElement {
 
       <template is="dom-repeat" items="{{urlHotel}}">
 
-        <div><br/># [[index]]</div>
-        
-        <div>Hotel name: <span>[[item.name]]</span></div>
+      <div class="row">
 
-        <template is="dom-repeat" items="[[ _makeStarsReview(item.stars) ]]">
-          <img id="reviewStars" src="../images/hstar.png" alt="reviewStars" /> 
-        </template>
+        <div id="hotel_ratingContainer_left" class="col-4">
 
-        [[item.stars]]
+          <img class="hotel_ratingImages" src="[[item.image]]">
 
-        <div>Hotel district: <span>[[item.district]]</span></div>
+        </div>
+      
+        <div id="hotel_ratingContainer_right" class="col-8">
 
-        <div>Hotel distance To CityCentre: <span>[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
+          <div><br/># [[index]]</div>
 
-        <div>Hotel Review Score: <span>[[item.review.score]]</span></div>
+          <div>Hotel name: <span>[[item.name]]</span></div>
 
-        <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
+          <template is="dom-repeat" items="[[ _makeStarsReview(item.stars) ]]">
+            <img id="reviewStars" src="../images/hstar.png" alt="reviewStars" /> 
+          </template>
+
+          [[item.stars]]
+
+          <div>Hotel district: <span>[[item.district]]</span></div>
+
+          <div>Hotel distance To CityCentre: <span>[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
+
+          <div>Hotel Review Score: <span>[[item.review.score]]</span></div>
+
+          <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
 
            Excellent
 
@@ -92,54 +110,55 @@ class HotelRatings extends PolymerElement {
              <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
            </div>
 
-        </template>
+          </template>
 
-        <template is="dom-if" if="[[_formatScoreImage_VeryGood(item.review.score)]]">
+          <template is="dom-if" if="[[_formatScoreImage_VeryGood(item.review.score)]]">
 
-          Very Good
-
-          <div id="reviewScore_Container">
-            <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-          </div>
-
-        </template>
-
-        <template is="dom-if" if="[[_formatScoreImage_Good(item.review.score)]]">
-
-          Good
+            Very Good
 
           <div id="reviewScore_Container">
             <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
           </div>
 
-        </template>
+          </template>
 
-        <template is="dom-if" if="[[_formatScoreImage_Fair(item.review.score)]]">
+          <template is="dom-if" if="[[_formatScoreImage_Good(item.review.score)]]">
 
-          Fair
-
-          <div id="reviewScore_Container">
-            <img id="reviewScore_Fair_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-          </div>
-
-        </template>
-
-        <template is="dom-if" if="[[_formatScoreImage_Poor(item.review.score)]]">
-
-          Poor
+            Good
 
           <div id="reviewScore_Container">
-            <img id="reviewScore_Poor_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+            <img id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
           </div>
 
-        </template>
+          </template>
 
-        <div>Hotel Review Count: <span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
+          <template is="dom-if" if="[[_formatScoreImage_Fair(item.review.score)]]">
 
-        <div>Hotel Costs: <span> S$ </span> <span> [[item.amount]] </span></div>
+            Fair
 
-        <img src="[[item.image]]">
+            <div id="reviewScore_Container">
+              <img id="reviewScore_Fair_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+            </div>
 
+          </template>
+
+          <template is="dom-if" if="[[_formatScoreImage_Poor(item.review.score)]]">
+
+            Poor
+
+            <div id="reviewScore_Container">
+              <img id="reviewScore_Poor_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
+            </div>
+
+          </template>
+
+          <div>Hotel Review Count: <span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
+
+          <div>Hotel Costs: <span> S$ </span> <span> [[item.amount]] </span></div>
+
+        <div>
+
+      </div>
       </template>
 
     `;
