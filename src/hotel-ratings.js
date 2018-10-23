@@ -42,69 +42,61 @@ class HotelRatings extends PolymerElement {
           padding: 10px;
         }
 
-        #reviewScore_Container{
+        #hotel_rating_review_score_container{
           width: 27px;
           height: 30px;
           overflow:hidden;
           position: relative;
         }
         
-        #hotel_ratingContainer_right {
+        #hotel_rating_container_right {
           padding-top: 5px;
         }
 
-        .hotel_ratingReviewScoreImage {
+        .hotel_rating_review_score_image {
           width: 25px;
           z-index: -10;
         }
 
-        #reviewScore_Container #reviewScore_Good_VeryGood_Excellent_Img {
+        #hotel_rating_review_score_container #hotel_rating_review_score_good_verygood_excellent_img {
           position: absolute;
           top: 2px;
         }
 
-        #reviewScore_Container #reviewScore_Fair_Img {
+        #hotel_rating_review_score_container #hotel_rating_review_score_fair_img {
           position: absolute;
           top: -28px;
         }
 
-        #reviewScore_Container #reviewScore_Poor_Img {
+        #hotel_rating_review_score_container #hotel_rating_review_score_poor_img {
           position: absolute;
           top: -58px;
         }
 
-        .hotel_ratingImages {
+        .hotel_rating_images {
           max-width:100%;
           height: auto;
         }
 
-        #reviewStars {
+        #hotel_rating_review_stars {
           width: 15px;
         }
 
-        #hotel_ratingReviewScore {
+        #hotel_rating_review_score {
           color: white;
           margin-left: 4px;
           margin-top: 5px;
           font-size: 13px;
         }
         
-        #hotel_ratingAmount {
+        #hotel_rating_amount {
           color:green;
           display: flex;
           float: right;
           margin-right: 5px;
         }
 
-        .inline-block {
-          display: inline-block;
-        }
-
-        .remove-padding {
-          padding: 0;
-        }
-
-        .hotel_ratingRowBorder {
+        .hotel_rating_row_border {
            border: 0.5px solid lightgrey;
         }
 
@@ -126,24 +118,32 @@ class HotelRatings extends PolymerElement {
           margin-right:4px;
         }
 
+        .inline-block {
+          display: inline-block;
+        }
+
+        .remove-padding {
+          padding: 0;
+        }
+        
       </style>
 
       <template is="dom-repeat" items="{{urlHotel}}">
 
-      <div class="row hotel_ratingRowBorder">
+      <div class="row hotel_rating_row_border">
 
-        <div id="hotel_ratingContainer_left" class="col-3 col-md-3 remove-padding">
-          <img class="hotel_ratingImages" src="[[item.image]]">
+        <div id="hotel_rating_container_left" class="col-3 col-md-3 remove-padding">
+          <img class="hotel_rating_images" src="[[item.image]]">
         </div>
       
-        <div id="hotel_ratingContainer_right" class="col-9 col-md-4">
+        <div id="hotel_rating_container_right" class="col-9 col-md-4">
 
           <div>[[item.name]]</div>
 
           <div class="hotel_rating_rows_height_adjustment">
             <div class="inline-block">
             <template is="dom-repeat" items="[[ _makeStarsReview(item.stars) ]]">
-              <img id="reviewStars" src="../images/hstar.png" alt="reviewStars" /> 
+              <img id="hotel_rating_review_stars" src="../images/hstar.png" alt="hotel_rating_review_stars" /> 
             </template>
             </div>
             <div class="inline-block hotel_rating_mobile_fontsize">[[item.district]]</div>
@@ -153,9 +153,9 @@ class HotelRatings extends PolymerElement {
 
           <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
 
-            <div class="inline-block" id="reviewScore_Container">
-              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            <div class="inline-block" id="hotel_rating_review_score_container">
+              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_good_verygood_excellent_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_rating_review_score">[[item.review.score]]</div>
             </div>
 
             <div class="inline-block hotel_rating_mobile_fontsize">
@@ -167,9 +167,9 @@ class HotelRatings extends PolymerElement {
 
           <template is="dom-if" if="[[_formatScoreImage_VeryGood(item.review.score)]]">
 
-            <div class="inline-block" id="reviewScore_Container">
-              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            <div class="inline-block" id="hotel_rating_review_score_container">
+              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_good_verygood_excellent_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_rating_review_score">[[item.review.score]]</div>
             </div>
 
             <div class="inline-block hotel_rating_mobile_fontsize">
@@ -181,9 +181,9 @@ class HotelRatings extends PolymerElement {
 
           <template is="dom-if" if="[[_formatScoreImage_Good(item.review.score)]]">
             
-            <div class="inline-block" id="reviewScore_Container">
-              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Good_VeryGood_Excellent_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            <div class="inline-block" id="hotel_rating_review_score_container">
+              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_good_verygood_excellent_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_rating_review_score">[[item.review.score]]</div>
             </div>
 
             <div class="inline-block hotel_rating_mobile_fontsize">
@@ -195,9 +195,9 @@ class HotelRatings extends PolymerElement {
 
           <template is="dom-if" if="[[_formatScoreImage_Fair(item.review.score)]]">
 
-            <div class="inline-block" id="reviewScore_Container">
-              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Fair_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            <div class="inline-block" id="hotel_rating_review_score_container">
+              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_fair_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_rating_review_score">[[item.review.score]]</div>
             </div>
 
             <div class="inline-block hotel_rating_mobile_fontsize">
@@ -209,9 +209,9 @@ class HotelRatings extends PolymerElement {
 
           <template is="dom-if" if="[[_formatScoreImage_Poor(item.review.score)]]">
 
-            <div class="inline-block" id="reviewScore_Container">
-              <img class="hotel_ratingReviewScoreImage" id="reviewScore_Poor_Img" src="../images/reviewscore.png" alt="reviewScore" /> 
-              <div id="hotel_ratingReviewScore">[[item.review.score]]</div>
+            <div class="inline-block" id="hotel_rating_review_score_container">
+              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_poor_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              <div id="hotel_rating_review_score">[[item.review.score]]</div>
             </div>
 
             <div class="inline-block hotel_rating_mobile_fontsize">
@@ -221,7 +221,7 @@ class HotelRatings extends PolymerElement {
 
           </template>
 
-          <div class="inline-block" id="hotel_ratingAmount"><span id="hotel_rating_currency"> S$ </span> <span> [[item.amount]] </span></div>
+          <div class="inline-block" id="hotel_rating_amount"><span id="hotel_rating_currency"> S$ </span> <span> [[item.amount]] </span></div>
 
         <div>
 
@@ -253,7 +253,7 @@ class HotelRatings extends PolymerElement {
   }
 
   _formatScoreImage_Good(score) {
-    // console.log(score, "is score working - very good hotel");
+    // console.log(score, "is score working - good hotel");
     if (score >= 75 && score <= 79 ) {
       return true;
     } 
