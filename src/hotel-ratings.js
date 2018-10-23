@@ -125,10 +125,10 @@ class HotelRatings extends PolymerElement {
         .remove-padding {
           padding: 0;
         }
-        
+
       </style>
 
-      <template is="dom-repeat" items="{{urlHotel}}">
+      <template is="dom-repeat" items="{{urlHotel}}" initialCount="20" targetFramerate="25">
 
       <div class="row hotel_rating_row_border">
 
