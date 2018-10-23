@@ -43,7 +43,6 @@ class HotelRatings extends PolymerElement {
         }
 
         #reviewScore_Container{
-          // height:283px;
           width: 27px;
           height: 30px;
           overflow:hidden;
@@ -280,17 +279,9 @@ class HotelRatings extends PolymerElement {
   }
 
   handleResponse(event, res) {
-
     this.urlHotel = res.response;
-
-    console.log(this.urlHotel, "res");
-    console.log(this.urlHotel.length, "res length");
-  }
-
-  nextHotelData() {
-    // new call to iron-ajax for hotel data
-    this.$.wego_API.generateRequest();
-    console.log("ajax call");
+    // console.log(this.urlHotel, "res");
+    // console.log(this.urlHotel.length, "res length");
   }
 
 }
