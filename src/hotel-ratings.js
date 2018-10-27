@@ -128,7 +128,7 @@ class HotelRatings extends PolymerElement {
 
       </style>
 
-      <template is="dom-repeat" items="{{urlHotel}}" initialCount="20" targetFramerate="25">
+      <template is="dom-repeat" items="{{urlHotel}}" initial-count="20" target-framerate="25">
 
       <div class="row hotel_rating_row_border">
 
