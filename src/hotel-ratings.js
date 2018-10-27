@@ -149,7 +149,7 @@ class HotelRatings extends PolymerElement {
             <div class="inline-block hotel_rating_mobile_fontsize">[[item.district]]</div>
           </div>
 
-          <div class="hotel_rating_mobile_fontsize hotel_rating_rows_height_adjustment_city-distance">[[item.distanceToCityCentre]] <span>km to city centre</span> </span></div>
+          <div class="hotel_rating_mobile_fontsize hotel_rating_rows_height_adjustment_city-distance">[[_convertTwoDecimalPlaces(item.distanceToCityCentre)]] <span>km to city centre</span> </span></div>
 
           <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
 
@@ -282,6 +282,10 @@ class HotelRatings extends PolymerElement {
     this.urlHotel = res.response;
     // console.log(this.urlHotel, "res");
     // console.log(this.urlHotel.length, "res length");
+  }
+
+  _convertTwoDecimalPlaces(x) {
+    return Number.parseFloat(x).toFixed(2);
   }
 
 }
