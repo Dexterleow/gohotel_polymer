@@ -223,24 +223,6 @@ class HotelRatings extends PolymerElement {
     return false;
   }
 
-  // _formatScoreImage_Grade(score) {
-  //   if (score >= 86 && score <= 100) {
-  //     return 'Excellent';
-  //   }
-  //   if (score >= 80 && score <= 85) {
-  //     return 'Very Good';
-  //   }
-  //   if (score >= 75 && score <= 79) {
-  //     return 'Good';
-  //   }
-  //   if (score >= 68 && score <= 74) {
-  //     return 'Fair';
-  //   }
-  //   if (score >= 0 && score <= 67) {
-  //     return 'Poor';
-  //   }
-  // }
-
   _isEqualTo(score, scoreGradeChart) {
 
     var scoreGradeHotel = "";
@@ -264,50 +246,12 @@ class HotelRatings extends PolymerElement {
     return scoreGradeHotel === scoreGradeChart;
   }
 
-  // _formatScoreImage_Excellent(score) {
-  //   // console.log(score, "is score working - excellent hotel");
-  //   if (score >= 86 && score <= 100) {
-  //     return true;
-  //   }
-  // }
-
-  // _formatScoreImage_VeryGood(score) {
-  //   // console.log(score, "is score working - very good hotel");
-  //   if (score >= 80 && score <= 85) {
-  //     return true;
-  //   }
-  // }
-
-  // _formatScoreImage_Good(score) {
-  //   // console.log(score, "is score working - good hotel");
-  //   if (score >= 75 && score <= 79) {
-  //     return true;
-  //   }
-  // }
-
-  // _formatScoreImage_Fair(score) {
-  //   // console.log(score, "is score working - fair hotel");
-  //   if (score >= 68 && score <= 74) {
-  //     return true;
-  //   }
-  // }
-
-  // _formatScoreImage_Poor(score) {
-  //   // console.log(score, "is score working - poor hotel");
-  //   if (score >= 0 && score <= 67) {
-  //     return true;
-  //   }
-  // }
-
   _makeStarsReview(stars) {
-    // console.log("make sweets working");
     return new Array(stars);
   }
 
   handleResponse(event, res) {
     this.urlHotel = res.response;
-    // console.log(this.urlHotel, "res");
-    // console.log(this.urlHotel.length, "res length");
   }
 
   _convertTwoDecimalPlaces(x) {
