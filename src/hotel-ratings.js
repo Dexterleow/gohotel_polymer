@@ -8,7 +8,10 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import {
+  PolymerElement,
+  html
+} from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-button/paper-button.js';
 // import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
@@ -135,7 +138,7 @@ class HotelRatings extends PolymerElement {
         <div id="hotel_rating_container_left" class="col-3 col-md-3 remove-padding">
           <img class="hotel_rating_images" src="[[item.image]]">
         </div>
-      
+        
         <div id="hotel_rating_container_right" class="col-9 col-md-4">
 
           <div>[[item.name]]</div>
@@ -148,77 +151,52 @@ class HotelRatings extends PolymerElement {
             </div>
             <div class="inline-block hotel_rating_mobile_fontsize">[[item.district]]</div>
           </div>
-
           <div class="hotel_rating_mobile_fontsize hotel_rating_rows_height_adjustment_city-distance">[[_convertTwoDecimalPlaces(item.distanceToCityCentre)]] <span>km to city centre</span> </span></div>
 
-          <template is="dom-if" if="[[_formatScoreImage_Excellent(item.review.score)]]">
+          <template is="dom-if" if="[[_formatScoreImage_GradeCheckTrue(item.review.score)]]">
 
             <div class="inline-block" id="hotel_rating_review_score_container">
-              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_good_verygood_excellent_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+
+              <template is="dom-if" if="[[_isEqualTo(item.review.score,'Excellent')]]">
+                <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_good_verygood_excellent_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              </template>
+              <template is="dom-if" if="[[_isEqualTo(item.review.score, 'Very Good')]]">
+                <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_good_verygood_excellent_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              </template>
+              <template is="dom-if" if="[[_isEqualTo(item.review.score, 'Good')]]">
+                <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_good_verygood_excellent_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              </template>
+              <template is="dom-if" if="[[_isEqualTo(item.review.score, 'Fair')]]">
+                <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_fair_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              </template>
+              <template is="dom-if" if="[[_isEqualTo(item.review.score, 'Poor')]]">
+                <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_poor_img" src="../images/reviewscore.png" alt="reviewScore" /> 
+              </template>
+
               <div id="hotel_rating_review_score">[[item.review.score]]</div>
+
             </div>
 
             <div class="inline-block hotel_rating_mobile_fontsize">
-              <div>Excellent</div>
-              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
+
+              <template is="dom-if" if="[[_isEqualTo(item.review.score,'Excellent')]]">
+                <div>Excellent</div>
+              </template>
+              <template is="dom-if" if="[[_isEqualTo(item.review.score, 'Very Good')]]">
+                <div>Very Good</div>
+              </template>
+              <template is="dom-if" if="[[_isEqualTo(item.review.score, 'Good')]]">
+                <div>Good</div>
+              </template>
+              <template is="dom-if" if="[[_isEqualTo(item.review.score, 'Fair')]]">
+                <div>Fair</div>
+              </template>
+              <template is="dom-if" if="[[_isEqualTo(item.review.score, 'Poor')]]">
+                <div>Poor</div>
+              </template>
+
+              <span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
             </div>
-
-          </template>
-
-          <template is="dom-if" if="[[_formatScoreImage_VeryGood(item.review.score)]]">
-
-            <div class="inline-block" id="hotel_rating_review_score_container">
-              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_good_verygood_excellent_img" src="../images/reviewscore.png" alt="reviewScore" /> 
-              <div id="hotel_rating_review_score">[[item.review.score]]</div>
-            </div>
-
-            <div class="inline-block hotel_rating_mobile_fontsize">
-              <div>Very Good</div>
-              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
-            </div>
-
-          </template>
-
-          <template is="dom-if" if="[[_formatScoreImage_Good(item.review.score)]]">
-            
-            <div class="inline-block" id="hotel_rating_review_score_container">
-              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_good_verygood_excellent_img" src="../images/reviewscore.png" alt="reviewScore" /> 
-              <div id="hotel_rating_review_score">[[item.review.score]]</div>
-            </div>
-
-            <div class="inline-block hotel_rating_mobile_fontsize">
-              <div>Good</div>
-              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
-            </div>
-
-          </template>
-
-          <template is="dom-if" if="[[_formatScoreImage_Fair(item.review.score)]]">
-
-            <div class="inline-block" id="hotel_rating_review_score_container">
-              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_fair_img" src="../images/reviewscore.png" alt="reviewScore" /> 
-              <div id="hotel_rating_review_score">[[item.review.score]]</div>
-            </div>
-
-            <div class="inline-block hotel_rating_mobile_fontsize">
-              <div>Fair</div>
-              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
-            </div>
-
-          </template>
-
-          <template is="dom-if" if="[[_formatScoreImage_Poor(item.review.score)]]">
-
-            <div class="inline-block" id="hotel_rating_review_score_container">
-              <img class="hotel_rating_review_score_image" id="hotel_rating_review_score_poor_img" src="../images/reviewscore.png" alt="reviewScore" /> 
-              <div id="hotel_rating_review_score">[[item.review.score]]</div>
-            </div>
-
-            <div class="inline-block hotel_rating_mobile_fontsize">
-              <div>Poor</div>
-              <div><span>[[item.review.reviewsCount]]</span> <span> Reviews </span> </div>
-            </div>
-
           </template>
 
           <div class="inline-block" id="hotel_rating_amount"><span id="hotel_rating_currency"> S$ </span> <span> [[item.amount]] </span></div>
@@ -238,40 +216,88 @@ class HotelRatings extends PolymerElement {
     };
   }
 
-  _formatScoreImage_Excellent(score) {
-    // console.log(score, "is score working - excellent hotel");
-    if (score >= 86 && score <= 100 ) {
+  _formatScoreImage_GradeCheckTrue(score) {
+    if (score >= 0 && score <= 100) {
       return true;
-    } 
+    }
+    return false;
   }
 
-  _formatScoreImage_VeryGood(score) {
-    // console.log(score, "is score working - very good hotel");
-    if (score >= 80 && score <= 85 ) {
-      return true;
-    } 
+  // _formatScoreImage_Grade(score) {
+  //   if (score >= 86 && score <= 100) {
+  //     return 'Excellent';
+  //   }
+  //   if (score >= 80 && score <= 85) {
+  //     return 'Very Good';
+  //   }
+  //   if (score >= 75 && score <= 79) {
+  //     return 'Good';
+  //   }
+  //   if (score >= 68 && score <= 74) {
+  //     return 'Fair';
+  //   }
+  //   if (score >= 0 && score <= 67) {
+  //     return 'Poor';
+  //   }
+  // }
+
+  _isEqualTo(score, scoreGradeChart) {
+
+    var scoreGradeHotel = "";
+
+    if (score >= 86 && score <= 100) {
+      scoreGradeHotel = 'Excellent';
+    }
+    if (score >= 80 && score <= 85) {
+      scoreGradeHotel = 'Very Good';
+    }
+    if (score >= 75 && score <= 79) {
+      scoreGradeHotel = 'Good';
+    }
+    if (score >= 68 && score <= 74) {
+      scoreGradeHotel = 'Fair';
+    }
+    if (score >= 0 && score <= 67) {
+      scoreGradeHotel = 'Poor';
+    }
+
+    return scoreGradeHotel === scoreGradeChart;
   }
 
-  _formatScoreImage_Good(score) {
-    // console.log(score, "is score working - good hotel");
-    if (score >= 75 && score <= 79 ) {
-      return true;
-    } 
-  }
+  // _formatScoreImage_Excellent(score) {
+  //   // console.log(score, "is score working - excellent hotel");
+  //   if (score >= 86 && score <= 100) {
+  //     return true;
+  //   }
+  // }
 
-  _formatScoreImage_Fair(score) {
-    // console.log(score, "is score working - fair hotel");
-    if (score >= 68 && score <= 74 ) {
-      return true;
-    } 
-  }
-  
-  _formatScoreImage_Poor(score) {
-    // console.log(score, "is score working - poor hotel");
-    if (score >= 0 && score <= 67 ) {
-      return true;
-    } 
-  }
+  // _formatScoreImage_VeryGood(score) {
+  //   // console.log(score, "is score working - very good hotel");
+  //   if (score >= 80 && score <= 85) {
+  //     return true;
+  //   }
+  // }
+
+  // _formatScoreImage_Good(score) {
+  //   // console.log(score, "is score working - good hotel");
+  //   if (score >= 75 && score <= 79) {
+  //     return true;
+  //   }
+  // }
+
+  // _formatScoreImage_Fair(score) {
+  //   // console.log(score, "is score working - fair hotel");
+  //   if (score >= 68 && score <= 74) {
+  //     return true;
+  //   }
+  // }
+
+  // _formatScoreImage_Poor(score) {
+  //   // console.log(score, "is score working - poor hotel");
+  //   if (score >= 0 && score <= 67) {
+  //     return true;
+  //   }
+  // }
 
   _makeStarsReview(stars) {
     // console.log("make sweets working");
