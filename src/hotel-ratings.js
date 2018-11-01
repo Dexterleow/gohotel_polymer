@@ -14,10 +14,10 @@ import {
 } from '@polymer/polymer/polymer-element.js';
 import '@polymer/iron-ajax/iron-ajax.js';
 import '@polymer/paper-button/paper-button.js';
-// import '@polymer/iron-flex-layout/iron-flex-layout-classes.js';
 import '@granite-elements/granite-bootstrap/granite-bootstrap.js';
 import {} from '@polymer/polymer/lib/elements/dom-repeat.js';
 import {} from '@polymer/polymer/lib/elements/dom-if.js';
+import '@polymer/iron-list/iron-list.js';
 import './shared-styles.js';
 
 class HotelRatings extends PolymerElement {
@@ -32,17 +32,21 @@ class HotelRatings extends PolymerElement {
         params='{"part":"snippet", "q":"polymer"}'
         method="get"
         handle-as="json"
-        on-response="handleResponse"
-        debounce-duration="300">
+        last-response="{{data}}">
       </iron-ajax>
 
       <style include="granite-bootstrap"></style>
       <style include="shared-styles">
 
         :host {
-          display: block;
-
+          height: 100vh;
+          display: flex;
           padding: 10px;
+          flex-direction: column;
+        }
+
+        iron-list {
+          flex: 1 1 auto;
         }
 
         #hotel_rating_review_score_container{
@@ -130,9 +134,10 @@ class HotelRatings extends PolymerElement {
         }
 
       </style>
+      
+      <iron-list items="[[data]]" as="item">
 
-      <template is="dom-repeat" items="{{urlHotel}}" initial-count="20" target-framerate="25">
-
+      <template>
       <div class="row hotel_rating_row_border">
 
         <div id="hotel_rating_container_left" class="col-3 col-md-3 remove-padding">
@@ -205,15 +210,16 @@ class HotelRatings extends PolymerElement {
 
       </div>
       </template>
-
+      </iron-list>
     `;
   }
   static get properties() {
-    return {
-      urlHotel: {
-        type: Array,
-      },
-    };
+    // return {
+    //   urlHotel: {
+    //     type: Array,
+    //     value() {return [];}
+    //   },
+    // };
   }
 
   _formatScoreImage_GradeCheckTrue(score) {
@@ -250,9 +256,9 @@ class HotelRatings extends PolymerElement {
     return new Array(stars);
   }
 
-  handleResponse(event, res) {
-    this.urlHotel = res.response;
-  }
+  // handleResponse(event, res) {
+  //   this.urlHotel = res.response;
+  // }
 
   _convertTwoDecimalPlaces(x) {
     return Number.parseFloat(x).toFixed(2);
