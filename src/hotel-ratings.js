@@ -214,12 +214,6 @@ class HotelRatings extends PolymerElement {
     `;
   }
   static get properties() {
-    // return {
-    //   urlHotel: {
-    //     type: Array,
-    //     value() {return [];}
-    //   },
-    // };
   }
 
   _formatScoreImage_GradeCheckTrue(score) {
@@ -255,10 +249,6 @@ class HotelRatings extends PolymerElement {
   _makeStarsReview(stars) {
     return new Array(stars);
   }
-
-  // handleResponse(event, res) {
-  //   this.urlHotel = res.response;
-  // }
 
   _convertTwoDecimalPlaces(x) {
     return Number.parseFloat(x).toFixed(2);
